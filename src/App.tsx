@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import ListGroup from "./components/ListGroup/ListGroup";
+import Alert from "./components/Alert";
+import Button from "./components/Button/Button";
+
+const items = ["Apple", "Banana", "Cherry", "Strawberry", "Orange"];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const handleSelectItem = (item: string) => {
+    console.error(`Selected item: ${item}`);
+  };
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Components</h1>
+        <br />
+        {/* <ListGroup
+          items={items}
+          heading="Fruits"
+          onSelectItem={handleSelectItem}
+        ></ListGroup> */}
+        <Alert>
+          Hello <b>World</b>!
+        </Alert>
+        <Button
+          color="primary"
+          size="lg"
+          onClick={() => console.error("Button clicked!")}
+        >
+          I am cool!
+        </Button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
