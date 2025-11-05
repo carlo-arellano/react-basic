@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ListGroup from "./components/ListGroup/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button/Button";
+import { useState } from "react";
 
 const items = ["Apple", "Banana", "Cherry", "Strawberry", "Orange"];
 
@@ -11,25 +12,30 @@ function App() {
     console.error(`Selected item: ${item}`);
   };
 
+  const [alertVisible, setAlertVisibility] = useState(false);
+
   return (
     <>
       <div>
         <h1>Components</h1>
         <br />
-        {/* <ListGroup
+        <ListGroup
           items={items}
           heading="Fruits"
           onSelectItem={handleSelectItem}
-        ></ListGroup> */}
-        <Alert>
-          Hello <b>World</b>!
-        </Alert>
+        ></ListGroup>
+        {alertVisible && (
+          <Alert onClose={() => setAlertVisibility(false)}>
+            <b>Warning!</b> There is an incoming alert box.
+          </Alert>
+        )}
+
         <Button
           color="primary"
           size="lg"
-          onClick={() => console.error("Button clicked!")}
+          onClick={() => setAlertVisibility(true)}
         >
-          I am cool!
+          Show Alert
         </Button>
       </div>
     </>
