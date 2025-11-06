@@ -7,6 +7,7 @@ import Button from "./components/Button/Button";
 import ButtonStyled from "./components/Button/ButtonStyled";
 import { AiFillAmazonCircle } from "react-icons/ai";
 import Like from "./components/Like";
+import ExpandableText from "./components/ExpandableText";
 
 const items = ["Apple", "Banana", "Cherry", "Strawberry", "Orange"];
 
@@ -17,6 +18,53 @@ function App() {
 
   const [alertVisible, setAlertVisibility] = useState(false);
   const [isLike, setIsLike] = useState(false);
+
+  const [game, setGame] = useState({
+    id: 1,
+    player: {
+      name: "John",
+    },
+  });
+
+  const [pizza, setPizza] = useState({
+    name: "Spicy Pepperoni",
+    toppings: ["Mushroom"],
+  });
+
+  const [cart, setCart] = useState({
+    discount: 0.1,
+    items: [
+      { id: 1, title: "Product 1", quantity: 1 },
+      { id: 2, title: "Product 3", quantity: 1 },
+    ],
+  });
+
+  const handleUpdateGame = () => {
+    // Updating the nested object
+    setGame({
+      ...game,
+      player: {
+        ...game.player,
+        name: "Mark",
+      },
+    });
+
+    // Updating the array
+    setPizza({
+      ...pizza,
+      toppings: [...pizza.toppings, "hot sauce"],
+    });
+
+    // Updating the array of objects
+    setCart({
+      ...cart,
+      items: cart.items.map((item) =>
+        item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
+      ),
+    });
+
+    console.error(cart);
+  };
 
   return (
     <>
@@ -56,6 +104,21 @@ function App() {
         <br />
         <br />
         <Like isLike={isLike} onClick={() => setIsLike(!isLike)} />
+
+        <br />
+        <br />
+        <ButtonStyled color="secondary" onClick={handleUpdateGame}>
+          Update Game Variable
+        </ButtonStyled>
+
+        <br />
+        <br />
+        <ExpandableText maxChars={100}>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus
+          vitae, est molestiae nihil tempore nulla, minima ullam labore
+          reprehenderit reiciendis veritatis. Incidunt deserunt omnis
+          repellendus voluptates quos neque labore eaque!
+        </ExpandableText>
       </div>
     </>
   );
