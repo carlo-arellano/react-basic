@@ -1,18 +1,15 @@
-import { useRef, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 
 const Form = () => {
-  const nameRef = useRef<HTMLInputElement>(null);
-  const ageRef = useRef<HTMLInputElement>(null);
-  const person = { name: "", age: 0 };
+  const [person, setPerson] = useState({
+    name: "",
+    age: "",
+  });
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (nameRef.current !== null && ageRef.current !== null) {
-      person.name = nameRef.current.value;
-      person.age = parseInt(ageRef.current.value);
-    }
 
-    console.log(person);
+    console.error(person);
   };
 
   return (
@@ -21,13 +18,29 @@ const Form = () => {
         <label htmlFor="name" className="form-label">
           Name
         </label>
-        <input id="name" ref={nameRef} type="text" className="form-control" />
+        <input
+          id="name"
+          onChange={(event) =>
+            setPerson({ ...person, name: event.target.value })
+          }
+          value={person.name}
+          type="text"
+          className="form-control"
+        />
       </div>
       <div className="mb-3">
         <label htmlFor="age" className="form-input">
           Age
         </label>
-        <input id="age" ref={ageRef} type="number" className="form-control" />
+        <input
+          id="age"
+          onChange={(event) =>
+            setPerson({ ...person, age: parseInt(event.target.value) })
+          }
+          value={person.age}
+          type="number"
+          className="form-control"
+        />
       </div>
       <div className="mb-3">
         <button type="submit" className="btn btn-primary">
