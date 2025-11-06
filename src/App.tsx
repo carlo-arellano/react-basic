@@ -8,6 +8,7 @@ import ButtonStyled from "./components/Button/ButtonStyled";
 import { AiFillAmazonCircle } from "react-icons/ai";
 import Like from "./components/Like";
 import ExpandableText from "./components/ExpandableText";
+import Form from "./components/Form";
 
 const items = ["Apple", "Banana", "Cherry", "Strawberry", "Orange"];
 
@@ -70,6 +71,8 @@ function App() {
     <>
       <div>
         <h1>Components</h1>
+        <Form />
+
         <br />
         <ListGroup
           items={items}
