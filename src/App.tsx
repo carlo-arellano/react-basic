@@ -73,7 +73,7 @@ function App() {
         <h1>Components</h1>
         <Form />
 
-        {/* <br />
+        <br />
         <ListGroup
           items={items}
           heading="Fruits"
@@ -121,7 +121,7 @@ function App() {
           vitae, est molestiae nihil tempore nulla, minima ullam labore
           reprehenderit reiciendis veritatis. Incidunt deserunt omnis
           repellendus voluptates quos neque labore eaque!
-        </ExpandableText> */}
+        </ExpandableText>
       </div>
     </>
   );
