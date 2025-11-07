@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { use, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ListGroup from "./components/ListGroup/ListGroup";
 import Alert from "./components/Alert";
@@ -9,6 +9,8 @@ import { AiFillAmazonCircle } from "react-icons/ai";
 import Like from "./components/Like";
 import ExpandableText from "./components/ExpandableText";
 import Form from "./components/Form";
+import ExpenseList from "./expense-tracker/components/ExpenseList";
+import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 
 const items = ["Apple", "Banana", "Cherry", "Strawberry", "Orange"];
 
@@ -67,11 +69,40 @@ function App() {
     console.error(cart);
   };
 
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "Expense 1", amount: 100, category: "Entertainment" },
+    {
+      id: 2,
+      description: "Expense 2",
+      amount: 100,
+      category: "Transportation",
+    },
+    { id: 3, description: "Expense 3", amount: 100, category: "Groceries" },
+    { id: 4, description: "Expense 4", amount: 100, category: "Utilities" },
+  ]);
+
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const visibleExpenses =
+    selectedCategory === "All"
+      ? expenses
+      : expenses.filter((expense) => expense.category === selectedCategory);
+
   return (
     <>
       <div>
         <h1>Components</h1>
-        <Form />
+        <div className="mb-3">
+          <ExpenseFilter
+            onSelectCategory={(category) => setSelectedCategory(category)}
+          />
+        </div>
+        <ExpenseList
+          expenses={visibleExpenses}
+          onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+        />
+
+        {/* <Form />
 
         <br />
         <ListGroup
@@ -121,7 +152,7 @@ function App() {
           vitae, est molestiae nihil tempore nulla, minima ullam labore
           reprehenderit reiciendis veritatis. Incidunt deserunt omnis
           repellendus voluptates quos neque labore eaque!
-        </ExpandableText>
+        </ExpandableText> */}
       </div>
     </>
   );
