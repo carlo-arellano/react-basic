@@ -11,6 +11,7 @@ import ExpandableText from "./components/ExpandableText";
 import Form from "./components/Form";
 import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
+import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 
 const items = ["Apple", "Banana", "Cherry", "Strawberry", "Orange"];
 
@@ -81,17 +82,28 @@ function App() {
     { id: 4, description: "Expense 4", amount: 100, category: "Utilities" },
   ]);
 
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-  const visibleExpenses =
-    selectedCategory === "All"
-      ? expenses
-      : expenses.filter((expense) => expense.category === selectedCategory);
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((expense) => expense.category === selectedCategory)
+    : expenses;
 
   return (
     <>
       <div>
         <h1>Components</h1>
+
+        <h2 className="mt-5">Expense Tracker</h2>
+        <div className="mb-5">
+          <ExpenseForm
+            onSubmit={(data) =>
+              setExpenses([
+                ...expenses,
+                { ...expenses, id: expenses.length + 1, ...data },
+              ])
+            }
+          />
+        </div>
         <div className="mb-3">
           <ExpenseFilter
             onSelectCategory={(category) => setSelectedCategory(category)}
@@ -102,7 +114,8 @@ function App() {
           onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
         />
 
-        {/* <Form />
+        <h2 className="mt-5">Form</h2>
+        <Form />
 
         <br />
         <ListGroup
@@ -152,7 +165,7 @@ function App() {
           vitae, est molestiae nihil tempore nulla, minima ullam labore
           reprehenderit reiciendis veritatis. Incidunt deserunt omnis
           repellendus voluptates quos neque labore eaque!
-        </ExpandableText> */}
+        </ExpandableText>
       </div>
     </>
   );
