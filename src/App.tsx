@@ -1,5 +1,5 @@
 import "./App.css";
-import { use, useState } from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ListGroup from "./components/ListGroup/ListGroup";
 import Alert from "./components/Alert";
@@ -12,6 +12,7 @@ import Form from "./components/Form";
 import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseForm";
+import ProductList from "./components/ProductList";
 
 const items = ["Apple", "Banana", "Cherry", "Strawberry", "Orange"];
 
@@ -88,10 +89,25 @@ function App() {
     ? expenses.filter((expense) => expense.category === selectedCategory)
     : expenses;
 
+  // Backend Module
+  const [category, setCategory] = useState("");
+
   return (
     <>
       <div>
         <h1>Components</h1>
+
+        <h2 className="mt-5">Backend</h2>
+        <ProductList category={category} />
+        <select
+          id="category"
+          className="form-select"
+          onChange={(event) => setCategory(event.target.value)}
+        >
+          <option value=""></option>
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+        </select>
 
         <h2 className="mt-5">Expense Tracker</h2>
         <div className="mb-5">
