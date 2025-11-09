@@ -13,6 +13,7 @@ import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 import ProductList from "./components/ProductList";
+import UserList from "./components/UserList";
 
 const items = ["Apple", "Banana", "Cherry", "Strawberry", "Orange"];
 
@@ -89,13 +90,16 @@ function App() {
     ? expenses.filter((expense) => expense.category === selectedCategory)
     : expenses;
 
-  // Backend Module
+  // Connecting to backend module
   const [category, setCategory] = useState("");
 
   return (
     <>
       <div>
         <h1>Components</h1>
+
+        <h2 className="mt-5">Backend User List</h2>
+        <UserList />
 
         <h2 className="mt-5">Backend</h2>
         <ProductList category={category} />
